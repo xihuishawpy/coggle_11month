@@ -44,3 +44,77 @@
 
 
 ## Linux 文件与目录管理
+
+1、绝对路径 、相对路径
+
+- 绝对路径
+说人话就是，“非常完整”的路径。
+这里指的就是绝对路径，当前位置的完整路径（从根目录/开始）
+![](https://files.catbox.moe/7viwxj.png)
+
+- 相对路径
+指的就是，相对于当前位置的路径。
+比如，现在从jims文件切到kuan文件下去，用..代表上一级目录的完整目录（就不用写/home/coggle/kuan这么长了）
+![](https://inews.gtimg.com/newsapp_ls/0/14182761484/0.png)
+
+2、处理目录的常用命令
+
+- ls 
+列出目录及文件名
+- cd 
+切换目录
+
+- pwd
+显示当前目录
+
+- mkdir
+创建目录
+
+- rmdir 
+删除一个空目录
+
+- cp 
+复制目录
+
+- rm 
+删除文件/目录
+
+- mv 
+移动文件/目录,还能修改文件/目录
+
+另外，使用 man [命令] 来查看各个命令的使用文档，如 ：man cp
+
+3、练习
+
+```shell
+
+$ pwd  # 当前目录
+/home/coggle
+$ mkdir Ceallach_Shaw #创建文件夹A
+$ cd Ceallach_Shaw/ #进入文件夹A
+$ pwd 
+/home/coggle/Ceallach_Shaw
+$ mkdir coggle # 在A下创建文件夹B
+$ ls
+coggle
+$ cd coggle/ # 进入文件夹B
+$ mkdir txt  # 在文件夹B下创建txt文件
+$ ls
+txt
+$ rm -rf txt # 删除txt
+$ ls
+$ pwd
+/home/coggle/Ceallach_Shaw/coggle
+$ cd .. # 返回上一级目录
+$ rm -rf coggle/ # 删除B文件夹
+$ cd ..
+$ rm -rf Ceallach_Shaw/ # 删除A文件夹
+$ ls # 查看当前目录
+4C79	LonelVino	  LonelVino.zip  dongyu  future_y  jaychou_lyrics.txt  lipufei	 myxc.tar.gz   s2.sh		t	  wordpress.zip
+BelaF	LonelVino.tar	  Sunny		 elics	 gzg	   jims		       myxc	 myxc.zip      selenim.py.save	test5.py
+Janayt	LonelVino.tar.gz  dengniewei	 foldit  hgw	   kuan		       myxc.tar  panda_zhangs  shell_0.sh	turkeymz
+$ 
+
+```
+
+
