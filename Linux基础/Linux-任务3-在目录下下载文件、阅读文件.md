@@ -84,6 +84,7 @@ wget -i filelist.txt
 2.3 nl
 
 在打印行号的场景下，cat 和 nl二选一（我选cat)
+
 ![](https://files.catbox.moe/slhmk6.png)
 
 
