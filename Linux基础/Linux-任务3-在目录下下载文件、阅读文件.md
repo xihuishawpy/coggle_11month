@@ -48,7 +48,7 @@ url4
 wget -i filelist.txt
 ```
 
-参考链接：https://www.cnblogs.com/pretty-ru/p/10936023.html
+
 
 
 
@@ -73,7 +73,6 @@ wget -i filelist.txt
 ![](https://files.catbox.moe/jrh5nf.png)
 
 -b : 打印行号（不打印空白行）
-
 ![](https://files.catbox.moe/li6g0d.png)
 
 
@@ -160,6 +159,9 @@ $ cat -n affairs.txt # 共6367行
 
 ```
 
-参考链接：https://www.cnblogs.com/jixp/p/10833801.html
+参考链接：
+
+https://www.cnblogs.com/pretty-ru/p/10936023.html
+https://www.cnblogs.com/jixp/p/10833801.html
 
 
