@@ -69,9 +69,11 @@ wget -i filelist.txt
 2.1 cat 
 
 -n : 打印行号(空白行也打印出来)
+
 ![](https://files.catbox.moe/jrh5nf.png)
 
 -b : 打印行号（不打印空白行）
+
 ![](https://files.catbox.moe/li6g0d.png)
 
 
