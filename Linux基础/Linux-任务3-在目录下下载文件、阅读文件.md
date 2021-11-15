@@ -73,6 +73,7 @@ wget -i filelist.txt
 ![](https://files.catbox.moe/jrh5nf.png)
 
 -b : 打印行号（不打印空白行）
+
 ![](https://files.catbox.moe/li6g0d.png)
 
 
@@ -136,8 +137,8 @@ coggle
 $ wget https://mirror.coggle.club/dataset/affairs.txt
 --2021-11-16 00:48:38--  https://mirror.coggle.club/dataset/affairs.txt
 Resolving mirror.coggle.club (mirror.coggle.club)... 113.229.252.249, 2408:8731:c001:2:3::3fb
-Connecting to mirror.coggle.club (mirror.coggle.club)|113.229.252.249|:443... connected.
 HTTP request sent, awaiting response... 200 OK
+Connecting to mirror.coggle.club (mirror.coggle.club)|113.229.252.249|:443... connected.
 Length: 92161 (90K) [text/plain]
 Saving to: ‘affairs.txt’
 
@@ -162,6 +163,7 @@ $ cat -n affairs.txt # 共6367行
 参考链接：
 
 https://www.cnblogs.com/pretty-ru/p/10936023.html
+
 https://www.cnblogs.com/jixp/p/10833801.html
 
 
