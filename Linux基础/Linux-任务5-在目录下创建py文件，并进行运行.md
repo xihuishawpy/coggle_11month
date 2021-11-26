@@ -3,6 +3,7 @@
 # 在目录下创建py文件，并进行运行
 
 
+## os，系统接口库
 在Python中有一个内置库os，是一个系统接口库，operating system interfaces。在linux系统中处理数据、运行脚本的时候，经常会操作文件和目录，所以os库就是起这个作用，对于固定逻辑的文件、目录的操作，都可以写成脚本的形式。
 
 
@@ -78,6 +79,7 @@
     ![](https://files.catbox.moe/ga84oz.png)
 
     如果只是需要列出当前目录下的所有目录（文件不需要），则在for循环后面加个条件判断是否为目录 `if os.path.isdir(x)`
+
     ```python
     [x for x in os.listdir('.') if os.path.isdir(x)]
     ```
@@ -138,7 +140,7 @@
 
     ('/home/coggle/Ceallach_Shawos_test', '.py')
 
-    列出当前目录下所有.py文件，需加上条件判断是否为文件 `if os.path.isfile(x)`:
+     列出当前目录下所有.py文件，需加上条件判断是否为文件 `if os.path.isfile(x)`:
 
     ```python
     l=[x for x in os.listdir('.') 
@@ -152,6 +154,19 @@
 
 使用os模块打印/usr/bin/路径下所有以m开头的文件
 
+```python
+import os 
+
+# 先切换到/usr/bin/目录下
+c = os.chdir('/usr/bin/')
+
+# path.isfile方法判断是否为文件，startswith判断字符串开头首字母m
+l = [x for x in os.listdir(c) 
+            if os.path.isfile(x) and x.startswith('m')]
+
+print(l)
+```
 
 
 
+![](https://files.catbox.moe/lil113.png)
