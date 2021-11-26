@@ -14,24 +14,26 @@ nano test.py #创建文件
 ![](https://inews.gtimg.com/newsapp_ls/0/14186353928/0.png)
 
 随便编辑，然后保存，会提醒你是否保存（直接按Y，就算是按了Y，还会继续提醒你是否取消之类的选项，非常贴心啊~~），然后enter保存。
-[![I5Ir0P.png](https://z3.ax1x.com/2021/11/17/I5Ir0P.png)](https://imgtu.com/i/I5Ir0P)
 
-2. 常用快捷键
+![](https://files.catbox.moe/08vhnv.png)
+
+1. 常用快捷键
 
 Ctrl + G ：取得线上说明（help），比较有用 （相当于指令说明书）。
 
-[![I5o2E6.md.png](https://z3.ax1x.com/2021/11/17/I5o2E6.md.png)](https://imgtu.com/i/I5o2E6)
+![](https://files.catbox.moe/ts30fs.png)
+
 
 Ctrl + X ：`离开naon软件，如果有修改则会提示保存`。
 
 Ctrl + R ：从其他文件读入数据，可以将某个文件的内容贴在本文件中（有意思的功能），**but 需要自己手动输入绝对路径，而且是不带路径提醒的输入**，有些麻烦了（文件名都想不起叫啥），需多开窗口或者提前复制好需要导入文件的绝对路径。
 
-[![I5T4oV.md.png](https://z3.ax1x.com/2021/11/17/I5T4oV.md.png)](https://imgtu.com/i/I5T4oV)
+![](https://files.catbox.moe/jg8kv2.png)
 
 
 Ctrl + C ：说明当前光标所在处的行数与列数等信息。
 
-[![I5TsJS.md.png](https://z3.ax1x.com/2021/11/17/I5TsJS.md.png)](https://imgtu.com/i/I5TsJS)
+![](https://files.catbox.moe/78qiej.png)
 
 Ctrl + _  ： 可以直接输入行号，光标快速移动到该行。
 
@@ -46,7 +48,7 @@ Alt + M： 可以支持鼠标来移动光标的功能，开关按钮（这个很
 vim 是最强大的编辑器（不接受反驳）。功能多到你压根就别想记住的那种。
 
 劝退图 ：（可以完全不用鼠标~）
-[![I5H13D.md.png](https://z3.ax1x.com/2021/11/17/I5H13D.md.png)](https://imgtu.com/i/I5H13D)
+![](https://files.catbox.moe/1wl439.png)
 
 在使用vim的时候，有3种模式
 - 命令模式（刚进去就是这个模式）
@@ -78,8 +80,7 @@ ESC，退出输入模式，切换到命令模式
 - wq 保存并退出
 
 3种模式之间的关系和简单使用，如下图所示：
-
-[![I5bbQg.md.png](https://z3.ax1x.com/2021/11/17/I5bbQg.md.png)](https://imgtu.com/i/I5bbQg)
+![](https://files.catbox.moe/ols59g.png)
 
 ## 简单练习
 
