@@ -170,3 +170,10 @@ print(l)
 
 
 ![](https://files.catbox.moe/lil113.png)
+
+
+
+
+参考链接：
+
+1. https://docs.python.org/zh-cn/3/library/os.html#os-file-dir
