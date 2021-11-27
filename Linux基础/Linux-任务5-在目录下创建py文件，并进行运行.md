@@ -1,7 +1,6 @@
 
-
+[TOC]
 # 在目录下创建py文件，并进行运行
-
 
 ## os模块
 在Python中有一个内置库os，是一个系统接口库，operating system interfaces。在linux系统中处理数据、运行脚本的时候，经常会操作文件和目录，所以os库就是起这个作用，对于固定逻辑的文件、目录的操作，都可以写成脚本的形式。
@@ -151,7 +150,7 @@
     ![](https://files.catbox.moe/we1n6d.png)
 
 
-### sys模块
+## sys模块
 
 sys 模块主要负责`与 Python 解释器进行交互`，该模块提供了一系列用于控制 Python 运行环境的函数和变量。
 
@@ -216,28 +215,32 @@ sys 模块主要负责`与 Python 解释器进行交互`，该模块提供了一
 
 2. sys.path
 
-   
+   >获取指定模块搜索路径的字符串集合。
+
+   当我们导入一个模块时：import xxx，默认情况下python解析器会搜索并按照当前目录、已安装的内置模块和第三方模块这个顺序打印出来，搜索路径存放在sys模块的path中：
+
+   ```python
+   import sys
+
+   print(sys.path)
+   ```
+
+   ![](https://files.catbox.moe/6espxk.png)
+
+   现在有一种很常见的情况，就是你写好了Py文件，放在另外一个目录下，如果当前目录下的py文件需要引用写好的py文件里的方法的时候，就需要将存放py脚本的目录加入sys.path的列表中。
+
+   对于`需要引用的模块和需要执行的脚本文件不在同一个目录时`，可以按照如下形式来添加路径：
+   ```python
+   import sys  
+   sys.path.append(’需要引用模块的地址')  
+
+   # sys.path.append(..)   # 这代表添加当前路径的上一级目录
+   ```
 
 
+## 练习
 
-
-
-   
-
-
-
-
-
-
-
-
-
-
-
-
-## 练习-1
-
-使用os模块打印/usr/bin/路径下所有以m开头的文件
+1. 使用os模块打印/usr/bin/路径下所有以m开头的文件
 
 ```python
 import os 
@@ -252,12 +255,24 @@ l = [x for x in os.listdir(c)
 print(l)
 ```
 
-
-
 ![](https://files.catbox.moe/lil113.png)
 
+2. 打印命令行参数
+
+```python
+import sys
+
+# 第一个参数为文件名，外部传入的参数从第二个参数开始
+print(sys.argv[1:])
+
+```
+
+![](https://files.catbox.moe/wm4fhc.png)
 
 
+
+
+---
 
 参考链接：
 
