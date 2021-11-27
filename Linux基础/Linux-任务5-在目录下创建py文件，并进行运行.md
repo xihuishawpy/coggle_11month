@@ -163,8 +163,12 @@ sys 模块主要负责`与 Python 解释器进行交互`，该模块提供了一
    我们经常看到在命令行的情况下，输入--help,--version等参数，即可打印出相关信息。sys.argv的作用就是传递外部参数值到目标方法/函数中去。
 
    下面就是打印python的帮助信息：
+
+   ![](https://files.catbox.moe/4bgbht.png)
+
    
-   ![](https://i.niupic.net/images/2021/11/27/9GUF.png)
+
+
 
 
 
