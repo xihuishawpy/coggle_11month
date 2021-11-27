@@ -160,11 +160,67 @@ sys 模块主要负责`与 Python 解释器进行交互`，该模块提供了一
    
    实现从程序`外部`向程序传递参数，简单说，sys.argv[]就是一个从程序外部获取参数的桥梁，其返回的时一个参数列表。第一个元素是程序本身，随后才依次是外部给予的参数。
 
-   我们经常看到在命令行的情况下，输入--help,--version等参数，即可打印出相关信息。sys.argv的作用就是传递外部参数值到目标方法/函数中去。
-
    下面就是打印python的帮助信息：
 
    ![](https://files.catbox.moe/4bgbht.png)
+
+   ```python
+   import sys
+
+   print(sys.argv)
+   ```
+   输出：
+   ![](https://files.catbox.moe/j3og6x.png)
+
+   可见，输出第一个参数是文件名，后面的参数就是外部传入的参数。
+
+   我们经常看到在命令行的情况下，输入--help,--version等参数，即可打印出相关信息。sys.argv的作用就是传递外部参数值到目标方法/函数中去。
+
+   再看一个书上的相关例子，关于--help,--version参数的实现：
+
+   ```python
+   import sys
+   def readfile(filename):
+      f=open(filename)
+      while True:
+         line=f.readline()
+         if len(line)==0:
+               break
+               print("wrong! EOF")
+         print(line)
+   if len(sys.argv) < 2:
+      print ('No action specified.')
+      sys.exit()
+   
+   # 从第二个参数（外部传入的第一个参数），以--开头的，并且从这个参数的第三个字符开始截取
+   if sys.argv[1].startswith('--'):
+      option = sys.argv[1][2:]
+      # 如果--后面的字符是version，则输出Version 1.2
+      if option == 'version':
+         print ('Version 1.2')
+      elif option == 'help':
+         print ('''\
+   This program prints files to the standard output.
+   Any number of files can be specified.
+   Options include:
+   --version : Prints the version number
+   --help    : Display this help''')
+      else:
+         print ('Unknown option.')
+      sys.exit()
+   else:
+      for filename in sys.argv[1:]:
+         readfile(filename)   
+
+   ```
+
+2. sys.path
+
+   
+
+
+
+
 
    
 
@@ -206,3 +262,5 @@ print(l)
 参考链接：
 
 1. https://docs.python.org/zh-cn/3/library/os.html#os-file-dir
+2. https://www.cnblogs.com/peterwong666/p/11059673.html
+3. 
