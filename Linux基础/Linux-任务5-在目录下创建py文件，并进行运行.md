@@ -278,4 +278,3 @@ print(sys.argv[1:])
 
 1. https://docs.python.org/zh-cn/3/library/os.html#os-file-dir
 2. https://www.cnblogs.com/peterwong666/p/11059673.html
-3. 
