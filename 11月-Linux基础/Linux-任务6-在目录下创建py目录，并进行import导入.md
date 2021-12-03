@@ -2,7 +2,7 @@
 
 # 在目录下创建py目录，并进行import导入
 
-## python 模块化
+## 模块化
 
 有些时候，我们需要借用写好的脚本里的函数等，就需要不同脚本之间进行交互，而被“借用”的py文件，就称为`模块`。
 
@@ -22,7 +22,6 @@ if __name__ == '__main__':
    print('程序自身在运行')
 else:
    print('我来自另一模块')
-
 ```
 
 输出结果：
@@ -40,4 +39,35 @@ $ python using_name.py
 
  每个模块都有一个__name__属性，`当其值是" __main__ "时，表明该模块自身在运行，否则是被引入。`
 
+## 练习
+
+1、affairs.py代码完成https://mirror.coggle.club/dataset/affairs.txt文件的读取；
+
+2、test6.py可以进行命令行解析，输出affairs.txt前10行内容
+
+affairs.py ：
+
+```python
+import pandas as pd
+
+def read():
+	df = pd.read_csv('https://mirror.coggle.club/dataset/affairs.txt')
+	return df
+```
+test6.py :
+
+```python
+import sys
+import affairs
  
+arg = sys.argv[1]
+print(affairs.read()[:int(arg)])
+```
+
+
+![20211204000530](https://s2.loli.net/2021/12/04/oVtgjMvkJw47BSc.png)
+
+
+
+
+
