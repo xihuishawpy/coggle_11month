@@ -1,6 +1,6 @@
 # coggle 打卡
 
-摸鱼打卡学习，哈哈哈~~
+摸鱼打卡
 
 11月打卡：
 打卡内容：<https://shimo.im/docs/dumrsexTRJkqSgIC/rea>
