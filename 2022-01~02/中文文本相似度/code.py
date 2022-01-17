@@ -1,11 +1,4 @@
-'''
-Description: 
-Version: 1.0
-Autor: xihuishaw
-Date: 2022-01-17 17:16:26
-LastEditors: xihuishaw
-LastEditTime: 2022-01-17 17:27:27
-'''
+
 # %%
 from re import T
 import numpy as np 
@@ -17,6 +10,13 @@ import jieba
 import distance 
 import seaborn as sns
 from collections import Counter
+
+import lightgbm as lgb
+import xgboost as xgb
+from sklearn.metrics import roc_auc_score, auc, roc_curve, accuracy_score, f1_score
+from sklearn.model_selection import StratifiedKFold
+from sklearn.preprocessing import StandardScaler, QuantileTransformer, KBinsDiscretizer, LabelEncoder, MinMaxScaler, PowerTransformer
+
 %matplotlib inline
 plt.rcParams['font.sans-serif']=['SimHei'] #用来正常显示中文标签
 plt.rcParams['axes.unicode_minus'] = False #用来正常显示负号
@@ -56,7 +56,7 @@ def percent(q1_cut,q2_cut):
 # https://github.com/goto456/stopwords
 def stopwords():
     stop_words =[]
-    with open('cn_stopwords.txt','r',encoding='UTF-8') as f:
+    with open('./cn_stopwords.txt','r',encoding='UTF-8') as f:
         for i in f.readlines():
             i = i.replace('\n','')
             stop_words.append(i)
@@ -146,10 +146,89 @@ def handle_feature(train):
     return train
                 
 # %%
-# train = handle_feature(train)
-# train.head()
 
-stopwords()
+def model(data):
+    train = pd.read_csv(data_dir+'/'+data+'/train.tsv',sep='\t',error_bad_lines=False,names=['q1','q2','label']).dropna()
+    test = pd.read_csv(data_dir+'/'+data+'/test.tsv',sep='\t',error_bad_lines=False,names=['q1','q2']).dropna()
+    test['label'] = -1 
+    dev = pd.read_csv(data_dir+'/'+data+'/dev.tsv',sep='\t',error_bad_lines=False,names=['q1','q2','label']).dropna()
+    train = train.dropna()
+    test = test.dropna()
+    
+    train = handle_feature(train)
+    test = handle_feature(test)
+    
+    feat_cols = ['Lev_distance','','word_match', 'tfidf_word_match']
+    
+    def train_lgb_kfold(X_train, y_train, X_test, n_fold=5):
+        '''train lightgbm with k-fold split'''
+        gbms = []
+        kfold = StratifiedKFold(n_splits=n_fold, random_state=2021, shuffle=True)
+        oof_preds = np.zeros((X_train.shape[0],))
+        test_preds = np.zeros((X_test.shape[0],))
 
+        for fold, (train_index, val_index) in enumerate(kfold.split(X_train, y_train)):
+            X_tr, X_val, y_tr, y_val = X_train.iloc[train_index], X_train.iloc[val_index], y_train[train_index], y_train[val_index]
+            dtrain = lgb.Dataset(X_tr, y_tr)
+            dvalid = lgb.Dataset(X_val, y_val, reference=dtrain)
+
+            params = {
+                'objective': 'binary',
+                'metric': 'auc',
+                'num_leaves': 512,
+                'boosting_type':'gbdt',
+                'subsample_freq':1,
+                'reg_alpha':0.5,
+                'reg_lambda':0.5,
+                'n_estimators':5000,
+                'learning_rate': 0.005,
+                'min_data_in_leaf': 150,
+                'feature_fraction': 0.8,
+                'bagging_fraction': 0.7,
+                'n_jobs': -1,
+                'seed': 2021
+            }
+
+            gbm = lgb.train(params,
+                            dtrain,
+                            num_boost_round=100,
+                            valid_sets=[dtrain, dvalid],
+                            verbose_eval=50,
+                            early_stopping_rounds=20)
+
+            oof_preds[val_index] = gbm.predict(X_val, num_iteration=gbm.best_iteration)
+            test_preds += gbm.predict(X_test, num_iteration=gbm.best_iteration) / kfold.n_splits
+            gbms.append(gbm)
+
+        return gbms, oof_preds, test_preds
+
+
+    def train_lgb(train, test, feat_cols, label_col, n_fold=5):
+        '''训练lightgbm'''
+        X_train = train[feat_cols]
+        y_train = train[label_col]
+        X_test = test[feat_cols]
+        gbms_lgb, oof_preds_lgb, test_preds_lgb = train_lgb_kfold(X_train, y_train, X_test, n_fold=n_fold)
+        
+        return gbms_lgb, oof_preds_lgb, test_preds_lgb
+    
+    gbms_lgb, oof_preds_lgb, test_preds_lgb = train_lgb(train, test,
+                                                    feat_cols=feat_cols,
+                                                    label_col='label')
+    
+    # 测试集预测结果
+
+    df_test_submit = pd.DataFrame({'index': test.index.to_list(),
+                                'prediction': test_preds_lgb})
+    ## 直接按 0.5 划分
+    df_test_submit['prediction'] =  np.where(df_test_submit['test_preds_lgb']>0.5,1,0)
+    df_test_submit.to_csv('./result/' + data + '.tsv', index=False, sep='\t')
+    print(f'{data}预测结果，输出成功~')
+    
 # %%
-
+if __name__ == '__main__':
+    data_dir = 'D:/study_hard/statistic/千言数据集'
+    data_list = ['bq_corpus','lcqmc','paws-x-zh']
+    # data_dir = 'E:/学习/千言数据集/'
+    for data in data_list:
+        model(data)
